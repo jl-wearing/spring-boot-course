@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Display all Products</title>
+    <style>
+        table, th, td {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+
+        body {
+            background-color: #3e3c3c;
+            color: white;
+        }
+
+        button {
+            border: none;
+            color: white;
+            background-color: #070727;
+            padding: 10px 17px;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            border-radius: 3px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        button:active {
+            opacity: 0.5;
+        }
+
+        label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Products Page</h1>
+        <h2>View Products</h2>
+
+        <table>
+            <caption>List of all Products</caption>
+            <thead>
+            <tr>
+                <th>PRODUCT NAME</th>
+                <th>PRODUCT PRICE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="p: ${products}">
+                <td th:text="${p.name}"></td>
+                <td th:text="${p.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <br><br>
+        <h2>Add Product</h2>
+        <form action="/products" method="post">
+            <fieldset>
+                <legend>Add a Product</legend>
+                <!-- Input the name of the product -->
+                <label for="name">Name: </label>
+                <input type="text" id="name" name="name">
+                <br>
+
+                <!-- Input the price of the product -->
+                <label for="price">Price: </label>
+                <input type="number" id="price" name="price" step="any" min="0">
+                <br>
+
+                <!-- Submit the form to the server -->
+                <button type="submit">Add product</button>
+            </fieldset>
+        </form>
+    </main>
+</body>
+</html>

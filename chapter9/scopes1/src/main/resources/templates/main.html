@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+  <style>
+a {
+      display: inline-block;
+      padding: 9px 15px;
+      color: white;
+      background-color: #00ba00;
+      font-weight: bold;
+      border-radius: 18px;
+      text-decoration: none;
+      transition: opacity 0.1s;
+    }
+    a:hover {
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Welcome, <span th:text="${username}"></span></h1>
+      <p>
+          Your login number is <span th:text="${loginCount}"></span>
+      </p>
+    <a href="/main?logout">Log Out</a>
+  </main>
+</body>
+</html>
