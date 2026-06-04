@@ -47,7 +47,7 @@ The goal of this project was to master the core "magic" behind the Spring Framew
 
 ---
 
-## 💭 Personal Takeaways
+## Personal Takeaways
 
 Before this book, I was fairly confident in Java; I understood the language, could build things with it, and felt comfortable with its fundamentals. I had no experience whatsoever with Spring, but I had seen code from videos I initially attempted to learn from online. For example, annotations would appear, objects would get created, dependencies would wire themselves together, and somehow it all just worked. I wanted to understand *why*.
 
