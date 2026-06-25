@@ -1,0 +1,20 @@
+package org.example;
+
+import org.example.configurations.ProjectConfig;
+import org.example.services.CommentService;
+import org.example.services.UserService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class App {
+    public static void main(String[] args) {
+        // Define the context.
+        var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
+
+        // Retrieve the instances from the context.
+        var userService = context.getBean(UserService.class);
+        var commentService = context.getBean(CommentService.class);
+
+        // Determine if they refer to the same commentrepository instances.
+        System.out.println(userService.getCommentRepository() == commentService.getCommentRepository());
+    }
+}
