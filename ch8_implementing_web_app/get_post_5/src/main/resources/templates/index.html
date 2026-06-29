@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products Home Page</title>
+</head>
+<body>
+<h1>Welcome to the products home page</h1>
+<h2>Products List</h2>
+<p th:if="${products.isEmpty()}">There are no products.</p>
+<ul th:unless="${products.isEmpty()}">
+    <li th:each="product : ${products}">
+        <span th:text="|${product.name} - ${product.price}|">Product - $0.00</span>
+
+        <!-- Delete an item -->
+        <form th:action="@{/delete}" method="post" th:object="${product}">
+            <input type="hidden" name="name" th:value="${product.name}">
+            <input type="hidden" name="price" th:value="${product.price}">
+            <button type="submit">Delete product</button>
+        </form>
+    </li>
+
+</ul>
+<br>
+<h2>Add a new Product!</h2>
+<form th:action="@{/}" method="post" th:object="${product}">
+    <fieldset>
+        <legend>Add a new Product!</legend>
+
+        <label for="name">Name: </label>
+        <input type="text" id="name" name="name" th:field="*{name}">
+
+        <label for="price">Price:</label>
+        <input type="number" step="any" id="price" name="price" th:field="*{price}">
+
+        <button type="submit">Add product</button>
+    </fieldset>
+</form>
+</body>
+</html>
