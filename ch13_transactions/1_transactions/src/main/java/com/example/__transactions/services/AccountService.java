@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -47,16 +48,26 @@ public class AccountService {
         // determine if the specified account numbers exist.
         Optional<Account> sender = accountRepository.getAccountById(senderID);
         Optional<Account> receiver = accountRepository.getAccountById(receiverID);
-        if (sender.isPresent() && receiver.isPresent()) {
-            // transfer the cash between the two accounts.
-            if (sender.get().getBalance().compareTo(transferDto.amount()) >= 0) {
-                // subtract from the sender and add to the receiver.
-                BigDecimal newSenderBalance = sender.get().getBalance().subtract(transferDto.amount());
-                BigDecimal newReceiverBalance = receiver.get().getBalance().add(transferDto.amount());
 
-                accountRepository.updateBalance(senderID, newSenderBalance);
-                accountRepository.updateBalance(receiverID, newReceiverBalance);
-            }
-        }
+        if (sender.isEmpty())
+            throw new AccountNotFoundException("Account not found with id " + senderID);
+        if (receiver.isEmpty())
+            throw new AccountNotFoundException("Account not found with id " + receiverID);
+        if (sender.get().getBalance().compareTo(transferDto.amount()) < 0)
+            throw new NotEnoughMoneyException("Not enough money to make transfer");
+        if (sender.get().getId().equals(receiver.get().getId()))
+            throw new IllegalArgumentException("You cannot send money to yourself");
+
+        // transfer the money between the accounts.
+        BigDecimal newSenderAmount = sender.get().getBalance().subtract(transferDto.amount());
+        BigDecimal newReceiverAmount = receiver.get().getBalance().add(transferDto.amount());
+
+        // update the respective account balances.
+        accountRepository.updateBalance(senderID, newSenderAmount);
+        accountRepository.updateBalance(receiverID, newReceiverAmount);
+    }
+
+    public List<Account> findAllAccounts() {
+        return accountRepository.findAllAccounts();
     }
 }

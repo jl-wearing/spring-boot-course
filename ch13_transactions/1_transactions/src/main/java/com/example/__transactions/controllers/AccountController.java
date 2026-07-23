@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -34,7 +35,17 @@ public class AccountController {
     }
 
     @PatchMapping("/")
-    public ResponseEntity<Account> transferCash(@Valid @RequestBody TransferDto transferDto) {
+    public ResponseEntity<String> transferCash(@Valid @RequestBody TransferDto transferDto) {
+        accountService.transferCash(transferDto);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Transfer successful");
+    }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<Account>> getAllAccounts() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(accountService.findAllAccounts());
     }
 }

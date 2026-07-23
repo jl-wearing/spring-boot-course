@@ -41,4 +41,16 @@ public class AccountRepository {
         String sql = "update account set balance = ? where id = ?";
         jdbcTemplate.update(sql, amount, id);
     }
+
+    public List<Account> findAllAccounts() {
+        String sql = "select * from account";
+
+        return jdbcTemplate.query(sql, (r, i) -> {
+            Account account = new Account();
+            account.setId(r.getString("id"));
+            account.setName(r.getString("name"));
+            account.setBalance(r.getBigDecimal("balance"));
+            return account;
+        });
+    }
 }
