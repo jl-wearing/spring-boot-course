@@ -1,0 +1,37 @@
+### POST request to test name of purchase required
+POST http://localhost:8080/api/products/
+Content-Type: application/json
+
+{
+  "price": 123.55
+}
+
+<> 2026-07-23T095146.400.json
+<> 2026-07-23T095022.400.json
+
+### POST request to test price of purchase required.
+POST http://localhost:8080/api/products/
+Content-Type: application/json
+
+{
+  "name": "tomato sauce"
+}
+
+<> 2026-07-23T095146-1.400.json
+
+### POST on all required fields
+POST http://localhost:8080/api/products/
+Content-Type: application/json
+
+{
+  "name": "cake",
+  "price": 22.95
+}
+
+<> 2026-07-23T095342.201.json
+
+### GET all purchases
+GET http://localhost:8080/api/products/
+Content-Type: application/json
+
+<> 2026-07-23T101636.200.json
