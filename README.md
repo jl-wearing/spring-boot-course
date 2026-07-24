@@ -25,7 +25,7 @@ A comprehensive, chapter-by-chapter implementation of Spring Framework fundament
 - ✅ Consuming REST Endpoints
 - ✅ Using Data Sources in Spring Apps
 - ✅ Using Transactions in Spring Apps
-- 🟠 Implementing Data Persistence with Spring Data
+- ✅ Implementing Data Persistence with Spring Data
 - 🟠 Testing your Spring App
 
 ---
