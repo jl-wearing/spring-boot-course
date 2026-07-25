@@ -48,7 +48,7 @@ public class AccountService {
 
         // make the transfer between the accounts.
         BigDecimal newSenderAmount = sender.getAmount().subtract(transferDto.getAmount());
-        BigDecimal newReceiverAmount = receiver.getAmount().subtract(transferDto.getAmount());
+        BigDecimal newReceiverAmount = receiver.getAmount().add(transferDto.getAmount());
 
         accountRepository.updateAmount(senderId, newSenderAmount);
         accountRepository.updateAmount(receiverId, newReceiverAmount);
